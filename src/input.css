@@ -8,13 +8,30 @@
     --color-dark: #1D2125;
     --color-danger: #DB0000;
 
+    --text-xxs: 0.7rem;
     --text-tiny: 0.8rem;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-*{
+/* *{
     @apply transition-colors duration-200 ease-in;
+} */
+
+.alert{
+    @apply border-1 border-primary dark:border-accent text-primary dark:text-accent px-2 py-0.5 rounded border-1 border-primary dark:border-accent text-primary dark:text-accent px-2 py-0.5 rounded text-tiny;
+}
+
+.badge{
+    @apply px-2 text-xxs py-1 rounded-sm;
+}
+
+.long{
+    @apply bg-primary dark:bg-accent text-white dark:text-dark font-extrabold;
+}
+
+.short{
+    @apply bg-danger text-white font-extrabold;
 }
 
 .theme{
@@ -42,7 +59,7 @@
 }
 
 .input-form{
-    @apply border-1 border-primary/30 text-primary dark:text-accent outline-0 focus:border-primary dark:focus:border-accent;
+    @apply py-1 px-2 border-1 border-primary/30 text-primary dark:text-accent outline-0 focus:border-primary dark:focus:border-accent;
 }
 
 .disabled{
@@ -62,9 +79,9 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 input[type="range"]::-webkit-slider-runnable-track{
-    @apply bg-gray-300;
+    @apply bg-primary;
 }
 
 .dark input[type="range"]::-webkit-slider-runnable-track{
-    @apply bg-gray-500;
+    @apply bg-accent;
 }
