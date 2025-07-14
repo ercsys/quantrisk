@@ -65,8 +65,6 @@ function calculate(){
     const result = document.getElementById('result');
     result.classList.toggle('hidden', formValidate.some(isNaN));
 
-    console.log(formValidate);
-
     // position
     const position = (isNaN(numEntry) || isNaN(numSL)) ? '' : ((numEntry > numSL) ? 'Long <span class="ml-1 badge long">L</span>' : 'Short <span class="ml-1 badge short">S</span>');
     el.position.innerHTML = position;
@@ -83,7 +81,7 @@ function calculate(){
     
     // take profit
     for (let i = 1; i <= 3 ; i++) {        
-        const tp = (slRange > 0) ? numEntry + (slRange * i) : numEntry - (slRange * i);
+        const tp = numEntry + (slRange * i);
         const profitSize = (numEquity * (numRisk / 100)) * i;
         el['tp'+i].innerHTML = isNaN(tp) || isNaN(profitSize) ? '' : `${currencyFormat(profitSize)} (at ${thousandSeparator(tp)})`;
     }
