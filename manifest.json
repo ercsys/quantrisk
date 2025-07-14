@@ -1,0 +1,15 @@
+{
+    "short_name" : "QuantRisk",
+    "name" : "QuantRisk",
+    "background_color" : "#1D2125",
+    "start_url": "/",
+    "display": "standalone",
+    "icons":[
+    {
+        "purpose": "maskable",
+        "sizes": "128x128",
+        "src": "src/img/maskable_icon_x128.png",
+        "type": "image/png"
+    }
+    ]
+}

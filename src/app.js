@@ -59,25 +59,33 @@ function calculate(){
     const numRisk     = parseFloat(el.risk.value);
     const numLeverage = parseFloat(el.leverage.value);
 
+    const formValidate = [
+        numEquity, numEntry , numSL, numRisk, numLeverage
+    ];
+    const result = document.getElementById('result');
+    result.classList.toggle('hidden', formValidate.some(isNaN));
+
+    console.log(formValidate);
+
     // position
     const position = (isNaN(numEntry) || isNaN(numSL)) ? '' : ((numEntry > numSL) ? 'Long <span class="ml-1 badge long">L</span>' : 'Short <span class="ml-1 badge short">S</span>');
     el.position.innerHTML = position;
     
     // risk size
     const rsize = numEquity * (numRisk / 100);
-    el.riskSize.innerHTML = isNaN(numSL) ? '' : `${currencyFormat(rsize)} (at ${thousandSeparator(numSL)})`;
+    el.riskSize.innerHTML = isNaN(numSL) || isNaN(rsize) ? '' : `${currencyFormat(rsize)} (at ${thousandSeparator(numSL)})`;
     
     // position size
     const slRange = numEntry - numSL;
     const slRangeVal = (slRange > 0) ? (numEntry - numSL) : (numSL - numEntry);
     const positionSize = rsize / slRangeVal;
-    el.positionSize.innerHTML = isNaN(positionSize) ? '' : thousandSeparator(positionSize);
+    el.positionSize.innerHTML = isNaN(positionSize) ? '' : `${thousandSeparator(positionSize)} units`;
     
     // take profit
     for (let i = 1; i <= 3 ; i++) {        
         const tp = (slRange > 0) ? numEntry + (slRange * i) : numEntry - (slRange * i);
         const profitSize = (numEquity * (numRisk / 100)) * i;
-        el['tp'+i].innerHTML = isNaN(tp) ? '' : `${currencyFormat(profitSize)} (at ${thousandSeparator(tp)})`;
+        el['tp'+i].innerHTML = isNaN(tp) || isNaN(profitSize) ? '' : `${currencyFormat(profitSize)} (at ${thousandSeparator(tp)})`;
     }
 
     // margin size
@@ -156,6 +164,14 @@ el.entryPrice.addEventListener('input', () =>{
 
 el.slPrice.addEventListener('input', () =>{
     validateEntryExit();
+    calculate();
+});
+
+el.reset.addEventListener('click', () => {
+    el.entryPrice.value = '';
+    el.slPrice.value = '';
+
+    el.entryPrice.focus();
     calculate();
 });
 // ========  form handling  ========

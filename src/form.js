@@ -22,6 +22,7 @@ export function getForm(){
         tp3           : get('tp3'),
 
         calculate     : get('calculate'),
+        reset         : get('reset'),
 
         messageEntry  : get('message-entry'),
     };
