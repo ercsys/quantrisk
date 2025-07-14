@@ -2,8 +2,6 @@
     "short_name" : "QuantRisk",
     "name" : "QuantRisk",
     "background_color" : "#1D2125",
-    "start_url": "/",
-    "display": "standalone",
     "icons":[
     {
         "purpose": "maskable",
